@@ -254,7 +254,7 @@ option { font-weight: normal; /* Ensure options are normal weight */ font-style:
 #managing-committee-page .committee-grid { /* General grid for this page */ display: grid; justify-content: center; gap: 30px; max-width: 1100px; /* Allow wider grid */ margin: 0 auto; /* Center grid */ }
 #managing-committee-page .managing-top-row { /* Aim for 3 columns on wider screens */ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 #managing-committee-page .managing-bottom-row { /* Aim for 2 columns on wider screens */ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); max-width: 800px; /* Limit width for 2 columns */ }
-.managing-member { text-align: center;height: fit-content; padding: 15px; background-color: rgba(255, 255, 255, 0.4); /* Optional subtle background */ border-radius: 8px; }
+.managing-member { text-align: center; padding: 15px; background-color: rgba(255, 255, 255, 0.4); /* Optional subtle background */ border-radius: 8px; }
 .managing-member-photo { width: 100%; /* Make image responsive within its container */ max-width: 280px; /* Control max size */ height: 200px; /* Maintain aspect ratio */ border-radius: 8px; /* Slightly rounded corners */ border: 3px solid var(--secondary-color); /* Gold border */ box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin: 0 auto 15px auto; /* Center image */ display: block; background-color: #eee; /* Placeholder bg */ }
 .managing-member h4 { font-family: var(--font-heading); font-size: 1.3rem; color: var(--primary-color); margin-bottom: 5px; }
 .managing-member p.designation { /* Style for designation */ font-size: 1rem; color: var(--text-color); /* Use default text color or slightly muted */ line-height: 1.4; }
@@ -305,8 +305,8 @@ option { font-weight: normal; /* Ensure options are normal weight */ font-style:
     /* Committee grids */
     #committee-page .core-committee, #committee-page .team-leads, #committee-page .team-members { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); max-width: 100%; }
     #committee-page .member-photo-wrapper { width: 120px; height: 120px; }
-    #committee-page .core-committee .member-photo-wrapper, #committee-page .committee-member.lead .member-photo-wrapper { width: 140px; height: 140px; }
-    #committee-page .team-members .member-photo-wrapper { width: 100px; height: 100px; }
+    #committee-page .core-committee .member-photo-wrapper, #committee-page .committee-member.lead .member-photo-wrapper { width: 260px; height: 260px; }
+    #committee-page .team-members .member-photo-wrapper { width: 160px; height: 160px; }
     #committee-page .insta-link i.fab.fa-instagram { font-size: 1.8rem; }
     #committee-page .team-members .insta-link i.fab.fa-instagram { font-size: 1.5rem; }
     /* Managing committee columns */
@@ -338,10 +338,11 @@ option { font-weight: normal; /* Ensure options are normal weight */ font-style:
     .section-title { font-size: 1.8rem; }
     .main-navigation a { font-size: 0.75rem; letter-spacing: 0; padding: 8px 2px;}
     .button { padding: 10px 18px; font-size: 0.85rem; } /* Smaller buttons */
-    .gallery-grid, .events-grid, .sponsors-grid { grid-template-columns: 1fr; gap: 20px; } /* Single column */
-    #committee-page .core-committee, #committee-page .team-leads, #committee-page .team-members { grid-template-columns: 1fr; }
-     #managing-committee-page .managing-top-row, #managing-committee-page .managing-bottom-row { grid-template-columns: 1fr; /* Single column */ }
-     .managing-member-photo { max-width: 200px; }
+    .gallery-grid, .events-grid, .sponsors-grid { grid-template-columns: 1fr; gap: 20px;} /* Single column */
+    #committee-page .core-committee, #committee-page .team-leads, #committee-page .team-members { grid-template-columns: 2fr; }
+    #committee-page .team-members { grid-template-columns: 2fr; grid-template-columns: repeat(2, 1fr); }
+    #managing-committee-page .managing-top-row, #managing-committee-page .managing-bottom-row { grid-template-columns: 1fr; /* Single column */ }
+    .managing-member-photo { max-width: 200px; }
     .gallery-grid img { height: 200px; }
     .event-poster-image { aspect-ratio: 3 / 4;aspect-ratio: 420 / 646; }
     .event-poster-title { font-size: 1rem; padding: 12px 10px 8px 10px; }
@@ -354,4 +355,75 @@ option { font-weight: normal; /* Ensure options are normal weight */ font-style:
     .event-time { min-width: auto; /* Allow time to wrap */ }
     .event-venue { font-size: 0.85rem; }
     .day-heading { font-size: 1.3rem; }
+
+}
+
+
+/* === Add or Replace Sponsor Styles in style.css === */
+
+/* --- Sponsors Section --- */
+#sponsors {
+    padding-bottom: 80px; /* Add more bottom padding if needed */
+}
+
+/* NEW Styles for Scrolling Logos */
+.sponsor-track-container {
+    width: 100%;
+    overflow: hidden; /* Hide the logos outside the container */
+    position: relative; /* Needed for potential pseudo-elements (like fade edges) */
+    padding: 20px 0; /* Add some vertical padding */
+    /* Optional: Add fade edges using pseudo-elements */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.sponsor-track {
+    display: flex;
+    width: fit-content; /* Let width be determined by content */
+    /* Calculate width based on number of sponsors * width + gap */
+    /* This is automatically handled by flex, but duplication is key */
+    animation: scrollLogos 30s linear infinite; /* Adjust duration (30s) as needed */
+}
+
+/* Pause animation on hover */
+.sponsor-track-container:hover .sponsor-track {
+    animation-play-state: paused;
+}
+
+/* Define the scrolling animation */
+@keyframes scrollLogos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move left by the width of ONE set of logos */
+        /* Requires calculation or inspection, but since we duplicated, it's -50% */
+        transform: translateX(-50%);
+    }
+}
+
+.sponsor-logo-slide {
+    padding: 0 35px; /* Horizontal padding creates space between logos */
+    display: flex;
+    align-items: center; /* Vertically center logo */
+    justify-content: center; /* Horizontally center logo */
+    flex-shrink: 0; /* Prevent logos from shrinking */
+    height: 80px; /* Match height of old logos or adjust */
+}
+
+.sponsor-logo-slide img {
+    max-height: 70px; /* Max height for the logo image itself */
+    max-width: 180px; /* Optional: Limit logo width */
+    width: auto; /* Maintain aspect ratio */
+    /* Keep existing filter styles for hover */
+    filter: grayscale(80%);
+    opacity: 0.8;
+    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease; /* Add transform */
+    cursor: pointer; /* Indicate they might be clickable (add links if needed) */
+}
+
+.sponsor-logo-slide:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1); /* Add scale on hover */
 }
