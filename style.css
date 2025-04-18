@@ -427,3 +427,82 @@ option { font-weight: normal; /* Ensure options are normal weight */ font-style:
     opacity: 1;
     transform: scale(1.1); /* Add scale on hover */
 }
+
+
+
+/* === Add or Merge these into style.css === */
+
+/* ... existing modal styles (.modal, .modal-content, .modal-close-button etc.)... */
+
+/* --- Announcement Modal Specific Styles --- */
+.announcement-modal {
+    z-index: 2500; /* Ensure it's above other modals if needed */
+     /* Keep existing .modal styles for backdrop, position etc. */
+}
+
+.announcement-modal-content {
+    max-width: 700px; /* Slightly wider */
+    background-color: #fffef9; /* Slightly warmer white */
+    border-color: var(--primary-color); /* Maroon border */
+    padding: 25px 35px;
+}
+
+.announcement-modal-content h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.announcement-modal-content h3 {
+    font-family: var(--font-heading);
+    color: var(--secondary-color); /* Gold subheading */
+    text-align: center;
+    font-size: 1.4rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.announcement-modal-content p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+.announcement-modal-content strong {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.announcement-modal-content ul {
+    margin-left: 20px; /* Indent list */
+    margin-bottom: 15px;
+}
+.announcement-modal-content li {
+     margin-bottom: 8px;
+}
+
+.announcement-modal-close {
+    /* Inherits .modal-close-button styles */
+     color: #888;
+}
+.announcement-modal-close:hover {
+    color: var(--primary-color);
+}
+
+.announcement-modal-content .button-primary {
+    display: inline-block; /* Make it inline block */
+    width: auto; /* Reset width */
+    padding: 10px 25px; /* Adjust padding */
+    font-size: 1rem;
+    margin: 0 auto; /* Center if parent is text-align:center */
+}
+/* Center the button wrapper paragraph */
+.announcement-modal-content p:has(> .button-primary) {
+    text-align: center;
+}
+
+/* Ensure modal divider styles are applied if needed */
+.announcement-modal-content .modal-divider {
+     margin: 20px 0;
+}
